@@ -1,0 +1,12 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+files_dir|object|71952d74299671d9
+results_dir|object|fa2b6ab449de344a
+get_data|function|16c8b12529e9a2a7
+summarise_crashes|function|44cb195071b51365
+plot_crash_yearly|function|5b2a90175ca3a9e2
+crash_file|stem|ea514bddb46e44c7|96d695e05595d551|250a5c56726f1cf8|758153852|/Users/margarita/Documents/git-repos/Files/Crash_Analysis_System_(CAS)_data.csv|t20419.1491063932s|s250546693b|250546693|file|local|vector|||0.438||
+dictionary_file|stem|bf40feeade16852e|b0bb5e4c771af6ce|250a5c56726f1cf8|-717516249|/Users/margarita/Documents/git-repos/Files/crash_data_dictionary.csv|t20419.1788666545s|s11961b|11961|file|local|vector|||0.001||
+crash_data|stem|e45c7e90ea57b852|4843cdb408d5a0d8|beaddabcdf200953|-1103061876||t20419.2451196457s|s40387326b|40387326|rds|local|vector|||3.659||
+dictionary_data|stem|0ab5bb0fbfd9d9da|2ef3d89628fd5191|e4bdc5fef146134f|-1647959197||t20419.245119871s|s4553b|4553|rds|local|vector|||0.002||
+summary_table|stem|19a3542b0b55146e|04488a0fbfb068d8|726f27e3e3c348fa|-1890126374||t20419.2451428953s|s1115b|1115|rds|local|vector|||0.014||
+crash_plot|stem|5284648c76b1ac82|8615c23766bd795b|bdba2cce56508022|-1378684996||t20419.2451438434s|s234605b|234605|rds|local|vector|||0.021||
