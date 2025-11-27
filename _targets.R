@@ -41,10 +41,17 @@ list(
     convert_to_crs(crash_data)
   ),
   
-  # ---------------- Example modelling step ---------
+  # ---------------- Modelling ---------
+  # crash summary
   tar_target(
     summary_table,
     summarise_crashes(crash_data)
+  ),
+  
+  # modelling df with 2018-2024 time frame
+  tar_target(
+    crashes_modelling,
+    build_crashes_modelling(crash_data)   
   ),
   
   # ---------------- Plot output ---------------------

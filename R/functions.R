@@ -33,3 +33,42 @@ convert_to_crs <- function(crash_data) {
   
   crashes_sf
 }
+
+# --------------- modelling function
+build_crashes_modelling <- function(crash_data) {
+  clean_region <- function(x) {
+    x %>%
+      stringr::str_to_lower() %>%
+      stringr::str_squish()
+  }
+  
+  crash_data %>%
+    dplyr::filter(crashYear >= 2018, crashYear <= 2025) %>%
+    dplyr::mutate(
+      severity_bin = dplyr::if_else(
+        crashSeverity %in% c("Fatal Crash", "Serious Crash"),
+        1L, 0L
+      ),
+      severity_cat = dplyr::if_else(
+        severity_bin == 1L,
+        "Severe (fatal/serious)",
+        "Non-severe"
+      ),
+      period = dplyr::case_when(
+        crashYear <= 2019 ~ "Pre",
+        crashYear %in% c(2020, 2021) ~ "Covid",
+        crashYear >= 2022 ~ "Post",
+        TRUE ~ NA_character_
+      ),
+      # VRU flags, check if NAs
+      bicycle = tidyr::replace_na(bicycle, 0),
+      moped = tidyr::replace_na(moped, 0),
+      motorcycle = tidyr::replace_na(motorcycle, 0),
+      pedestrian = tidyr::replace_na(pedestrian, 0),
+      vru = dplyr::if_else(
+        bicycle > 0 | moped > 0 | motorcycle > 0 | pedestrian > 0,
+        1L, 0L
+      ),
+      region = clean_region(region)
+    )
+}
