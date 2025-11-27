@@ -35,6 +35,12 @@ list(
     get_data(dictionary_file)
   ),
   
+  # -------------- Spatial conversion -----------
+  tar_target(
+    crashes_sf,
+    convert_to_crs(crash_data)
+  ),
+  
   # ---------------- Example modelling step ---------
   tar_target(
     summary_table,
