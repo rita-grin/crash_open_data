@@ -2,7 +2,6 @@ library(targets)
 library(tarchetypes)
 
 files_dir <- path.expand("~/Documents/git-repos/Files")
-results_dir <- "Results"
 
 tar_source("R")   
 
@@ -54,11 +53,58 @@ list(
     build_crashes_modelling(crash_data)   
   ),
   
+  # severe proportion by period & region (Pre/Covid/Post)
+  tar_target(
+    severity_summary,
+    build_severity_summary(crashes_modelling)
+  ),
+  
+  # logistic model for severity ~ period
+  tar_target(
+    model_severity_period,
+    glm(
+      severity_bin ~ period,
+      data = crashes_modelling,
+      family = binomial(link = "logit")
+    )
+  ),
+  
+  tar_target(
+    OR_severity_period,
+    extract_or_table(model_severity_period)
+  ),
+  
+  # logistic model for VRU ~ period
+  tar_target(
+    model_vru_period,
+    glm(
+      vru ~ period,
+      data = crashes_modelling,
+      family = binomial(link = "logit")
+    )
+  ),
+  
+  tar_target(
+    OR_vru_period,
+    extract_or_table(model_vru_period)
+  ),
+  
   # --------------- Shiny App ------------
   # dataset for Shiny: join modelling vars + geometry
   tar_target(
     crashes_interactive,
     prepare_shiny_data(crashes_modelling, crashes_sf)
+  ),
+  
+  # -------------- export for Shiny App ------------
+  tar_target(
+    crashes_interactive_rds,
+    {
+      dir.create("Outputs", showWarnings = FALSE)
+      saveRDS(crashes_interactive, "Outputs/crashes_interactive.rds")
+      "Outputs/crashes_interactive.rds"
+    },
+    format = "file"
   ),
   
   # ---------------- Plot output ---------------------

@@ -35,6 +35,7 @@ convert_to_crs <- function(crash_data) {
 }
 
 # --------------- modelling function
+# crahes modelling
 build_crashes_modelling <- function(crash_data) {
   clean_region <- function(x) {
     x %>%
@@ -73,6 +74,34 @@ build_crashes_modelling <- function(crash_data) {
     )
 }
 
+# severity modelling
+build_severity_summary <- function(crashes_modelling) {
+  crashes_modelling %>%
+    dplyr::filter(!is.na(period)) %>%
+    dplyr::group_by(region, period) %>%
+    dplyr::summarise(
+      total_crashes = dplyr::n(),
+      severe_crashes = sum(severity_bin, na.rm = TRUE),
+      severe_per_crash = severe_crashes / total_crashes,
+      .groups = "drop"
+    ) %>%
+    dplyr::mutate(
+      period = factor(period, levels = c("Pre", "Covid", "Post"))
+    )
+}
+
+# create table
+extract_or_table <- function(model) {
+  broom::tidy(model, conf.int = TRUE, exponentiate = TRUE) %>%
+    dplyr::rename(
+      OR        = estimate,
+      OR_low    = conf.low,
+      OR_high   = conf.high,
+      p_value   = p.value
+    )
+}
+
+
 # ------------- Shiny App
 prepare_shiny_data <- function(crashes_modelling, crashes_sf) {
   #check for ID col
@@ -87,3 +116,4 @@ prepare_shiny_data <- function(crashes_modelling, crashes_sf) {
     dplyr::right_join(crashes_modelling, by = "OBJECTID") %>%
     sf::st_as_sf()
 }
+
