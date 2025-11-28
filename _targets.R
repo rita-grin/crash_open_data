@@ -54,6 +54,13 @@ list(
     build_crashes_modelling(crash_data)   
   ),
   
+  # --------------- Shiny App ------------
+  # dataset for Shiny: join modelling vars + geometry
+  tar_target(
+    crashes_interactive,
+    prepare_shiny_data(crashes_modelling, crashes_sf)
+  ),
+  
   # ---------------- Plot output ---------------------
   tar_target(
     crash_plot,

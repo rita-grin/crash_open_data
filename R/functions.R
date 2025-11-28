@@ -72,3 +72,18 @@ build_crashes_modelling <- function(crash_data) {
       region = clean_region(region)
     )
 }
+
+# ------------- Shiny App
+prepare_shiny_data <- function(crashes_modelling, crashes_sf) {
+  #check for ID col
+  if (!"OBJECTID" %in% names(crashes_modelling) ||
+      !"OBJECTID" %in% names(crashes_sf)) {
+    stop("prepare_shiny_data(): need OBJECTID column in both tables.")
+  }
+  
+  # join datasets
+  crashes_sf %>%
+    dplyr::select(OBJECTID, geometry) %>%
+    dplyr::right_join(crashes_modelling, by = "OBJECTID") %>%
+    sf::st_as_sf()
+}
