@@ -14,7 +14,11 @@ plot_crash_yearly <- function(df) {
   ggplot2::ggplot(df, ggplot2::aes(x = crashYear, y = number_crashes)) +
     ggplot2::geom_line() +
     ggplot2::geom_point() +
-    ggplot2::theme_minimal() +
+    ggplot2::theme_minimal() + 
+    ggplot2::theme(
+      axis.title.x = ggplot2::element_text(margin = ggplot2::margin(t = 15)),
+      axis.title.y = ggplot2::element_text(margin = ggplot2::margin(r = 15))
+      ) +
     ggplot2::labs(title = "Crashes per Year",
                   x = "Year", y = "Number of Crashes")
 }
@@ -117,3 +121,73 @@ prepare_shiny_data <- function(crashes_modelling, crashes_sf) {
     sf::st_as_sf()
 }
 
+# ------------- Test population
+load_pop_region_raw <- function(path) {
+  readxl::read_excel(
+    path  = path,
+    sheet = "Table 1",
+    range = "A6:D24"
+  )
+}
+
+clean_pop_region <- function(pop_region_raw) {
+  pop_region <- pop_region_raw
+  names(pop_region) <- c("region", "pop2023", "pop2024", "pop2025")
+  
+  pop_region <- pop_region %>%
+    dplyr::filter(
+      !region %in% c(
+        "North Island regions",
+        "South Island regions"
+      )
+    )
+  
+  clean_region <- function(x) {
+    x %>%
+      stringr::str_to_lower() %>%
+      stringr::str_squish()
+  }
+  
+  pop_region %>%
+    dplyr::mutate(region = clean_region(region))
+}
+
+build_severity_2024_region <- function(crashes_modelling, pop_region) {
+  crashes_2024 <- crashes_modelling %>%
+    dplyr::filter(crashYear == 2024)
+  
+  crashes_2024 %>%
+    dplyr::group_by(region) %>%
+    dplyr::summarise(
+      total_crashes  = dplyr::n(),
+      severe_crashes = sum(severity_bin, na.rm = TRUE),
+      .groups = "drop"
+    ) %>%
+    dplyr::left_join(pop_region, by = "region") %>%
+    dplyr::mutate(
+      severe_per_100k = severe_crashes / pop2024 * 100000
+    )
+}
+
+# plot severity
+plot_severity_period <- function(data) {
+  data %>%
+    dplyr::filter(!is.na(region)) %>%  
+    dplyr::mutate(region = stringr::str_to_title(region)) %>%
+    ggplot2::ggplot(ggplot2::aes(x = period, y = severe_per_crash,
+                               group = region, colour = region)) +
+    ggplot2::geom_line(linewidth = 1) +
+    ggplot2::geom_point(size = 2) +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(
+      axis.title.x = ggplot2::element_text(margin = ggplot2::margin(t = 15)),
+      axis.title.y = ggplot2::element_text(margin = ggplot2::margin(r = 15)),
+      legend.position = "right"
+    ) +
+    ggplot2::labs(
+      title = "Severe crashes as proportion of all crashes",
+      x = "Period",
+      y = "Severe crashes per crash",
+      colour = "Region"
+    )
+}

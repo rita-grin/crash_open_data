@@ -24,6 +24,12 @@ list(
     format = "file"
   ),
   
+  tar_target(
+    pop_file,
+    file.path(files_dir, "subnational-population-estimates.xlsx"),
+    format = "file"
+  ),
+  
   # ---------------- Load data -----------------------
   tar_target(
     crash_data,
@@ -33,6 +39,16 @@ list(
   tar_target(
     dictionary_data,
     get_data(dictionary_file)
+  ),
+  
+  tar_target(
+    pop_region_raw,
+    load_pop_region_raw(pop_file) # from R/functions_pop.R
+  ),
+  
+  tar_target(
+    pop_region,
+    clean_pop_region(pop_region_raw)  # clean names, drop totals
   ),
   
   # -------------- Spatial conversion -----------
@@ -90,6 +106,12 @@ list(
     extract_or_table(model_vru_period)
   ),
   
+  # 2024 severe per 100k by region
+  tar_target(
+    severity_2024_region,
+    build_severity_2024_region(crashes_modelling, pop_region)
+  ),
+  
   # --------------- Shiny App ------------
   # dataset for Shiny: join modelling vars + geometry
   tar_target(
@@ -97,7 +119,7 @@ list(
     prepare_shiny_data(crashes_modelling, crashes_sf)
   ),
   
-  # -------------- export for Shiny App ------------
+  # -------------- export files  ------------
   tar_target(
     crashes_interactive_rds,
     {
@@ -108,9 +130,32 @@ list(
     format = "file"
   ),
   
+  tar_target(
+    severity_2024_region_rds,
+    {
+      saveRDS(severity_2024_region, "Outputs/severity_2024_region.rds")
+      "Outputs/severity_2024_region.rds"
+    },
+    format = "file"
+  ),
+  
+  tar_target(
+    severity_summary_rds,
+    {
+      saveRDS(severity_summary, "Outputs/severity_summary.rds")
+      "Outputs/severity_summary.rds"
+    },
+    format = "file"
+  ),
+  
   # ---------------- Plot output ---------------------
   tar_target(
     crash_plot,
     plot_crash_yearly(summary_table)
+  ),
+  
+  tar_target(
+    severity_plot,
+    plot_severity_period(severity_summary)
   )
 )
