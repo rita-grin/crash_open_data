@@ -47,4 +47,5 @@ Author
 Margarita Grishechkina, Master of Applied Data Science, University of Canterbury, Christchurch, New Zealand
 
 Licence
+
 Open-source project based on publicly available datasets
