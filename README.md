@@ -20,11 +20,16 @@ How to run
 git clone https://github.com/rita-grin/crash_open_data
 cd crash_open_data
 
-2. Build analysis workflow
+2. Download open data
+* dictionary https://opendata-nzta.opendata.arcgis.com/pages/cas-data-field-descriptions
+* CAS open data portal https://www.nzta.govt.nz/safety/partners/crash-analysis-system
+* STATs population estimates https://www.stats.govt.nz/information-releases/subnational-population-estimates-at-30-june-2025/
+
+3. Build analysis workflow
 library(targets)
 tar_make()
 
-3. Launch Shiny dashboard
+4. Launch Shiny dashboard
 shiny::runApp("app")
 
 Outputs:   
@@ -42,9 +47,13 @@ Future work:
 * Integration with traffic-flow and population normalisation,
 * Refinement of regional prioritisation
 
-Author
+Author:
+* Margarita Grishechkina, Master of Applied Data Science, University of Canterbury, Christchurch, New Zealand
 
-Margarita Grishechkina, Master of Applied Data Science, University of Canterbury, Christchurch, New Zealand
+References:
+* CAS open portal: https://spatial.nzta.govt.nz/portal/apps/webappviewer/index.html?id=5e2fde731ebe42f69d5d989d02ab1b41
+* STATs NZ: https://www.stats.govt.nz
+* GitHub "Get started with targets" https://github.com/wlandau/targets-four-minutes
 
 Licence
 
