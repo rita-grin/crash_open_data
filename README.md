@@ -17,8 +17,8 @@ This project is built using R (targets, dplyr, sf, ggplot2, broom, leaflet, shin
 How to run
 
 1. Clone the repository
-git clone https://github.com/rita-grin/crashes_open_data
-cd crashes_open_data
+git clone https://github.com/rita-grin/crash_open_data
+cd crash_open_data
 
 2. Build analysis workflow
 library(targets)
