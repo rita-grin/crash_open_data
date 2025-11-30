@@ -33,10 +33,6 @@ Outputs:
 * Odds ratio modelling results
 * Interactive regional crash viewer (Shiny)
 
-Model results summary
-Comparison	  Severity OR	    VRU OR
-Post vs Pre	     +29%	         +19%
-
 Deployment considerations:   
 * Automate pipeline refresh using GitHub Actions,
 * Extend with speed-limit change layers and exposure metrics (VKT, mobility)
