@@ -6,7 +6,8 @@ files_dir <- path.expand("~/Documents/git-repos/Files")
 tar_source("R")   
 
 tar_option_set(
-  packages = c("readr", "dplyr", "ggplot2", "sf", "lubridate")
+  packages = c("readr", "dplyr", "ggplot2", "sf", "lubridate", "tidyr", 
+               "stringr", "broom")
 )
 
 list(
