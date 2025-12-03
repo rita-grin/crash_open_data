@@ -48,7 +48,7 @@ Future work:
 * Refinement of regional prioritisation
 
 Author:
-* Margarita Grishechkina, Master of Applied Data Science, University of Canterbury, Christchurch, New Zealand
+* Margarita Grishechkina, Master of Applied Data Science, University of Canterbury, Christchurch, New Zealand.
 
 References:
 * CAS open portal: https://spatial.nzta.govt.nz/portal/apps/webappviewer/index.html?id=5e2fde731ebe42f69d5d989d02ab1b41
