@@ -4,7 +4,6 @@ dictionary_file|stem|bf40feeade16852e|b0bb5e4c771af6ce|250a5c56726f1cf8|-7175162
 crash_data|stem|e45c7e90ea57b852|4843cdb408d5a0d8|beaddabcdf200953|-1103061876||t20419.2451196457s|s40387326b|40387326|rds|local|vector|||3.659||
 dictionary_data|stem|0ab5bb0fbfd9d9da|2ef3d89628fd5191|e4bdc5fef146134f|-1647959197||t20419.245119871s|s4553b|4553|rds|local|vector|||0.002||
 summary_table|stem|19a3542b0b55146e|04488a0fbfb068d8|726f27e3e3c348fa|-1890126374||t20419.2451428953s|s1115b|1115|rds|local|vector|||0.014||
-crash_plot|stem|5284648c76b1ac82|8615c23766bd795b|bdba2cce56508022|-1378684996||t20419.2451438434s|s234605b|234605|rds|local|vector|||0.021||
 crashes_sf|stem|686666c3ae759e5a|375d588546250181|d2698d4a23a8d92b|-1896383554||t20419.7561816323s|s42380362b|42380362|rds|local|vector|||0.578||
 crashes_modelling|stem|c0dfd0d929a2afa1|bf84f16c886977e8|3d2467627cad3ae6|499374677||t20419.8126137868s|s12464473b|12464473|rds|local|vector|||0.279||
 crashes_interactive|stem|fbf50231d4662b95|35b66a3911907148|84f7fe9c4c631669|37234281||t20420.1801665916s|s15907584b|15907584|rds|local|vector|||0.175||
@@ -21,6 +20,7 @@ pop_region|stem|5c5bfcd5c0a122b3|f66626b160c6194a|236639d115234f7d|-489486374||t
 severity_2024_region|stem|cef238be0b402f4c|d5a5b3a560e0065f|da1b7b1e3938abc8|-2052780998||t20422.2316360454s|s815b|815|rds|local|vector|||0.072||
 severity_summary_rds|stem|3c3c1c6cdba3d931|ded7241b74412b65|9580d299de56e2f4|-589585759|Outputs/severity_summary.rds|t20422.2316361528s|s1129b|1129|file|local|vector|||0||
 severity_2024_region_rds|stem|cef238be0b402f4c|5d10d948d0423c9f|2239a76630b884bd|929469074|Outputs/severity_2024_region.rds|t20422.2316363189s|s815b|815|file|local|vector|||0.001||
+severity_plot|stem|d40d645b9c423117|182beb366c834ce3|598120d4d5dec5fa|1171342400||t20422.3600256552s|s235907b|235907|rds|local|vector|||0.024||
 build_severity_2024_region|function|919a0aa9b9ac4998
 convert_to_crs|function|5a1910060edc3bef
 build_severity_summary|function|0145c7f61a2282a8
@@ -31,7 +31,7 @@ get_data|function|16c8b12529e9a2a7
 summarise_crashes|function|44cb195071b51365
 clean_pop_region|function|fde30965b1951d1a
 build_crashes_modelling|function|96905efa7db06af7
-plot_crash_yearly|function|5b2a90175ca3a9e2
+plot_crash_yearly|function|544106732e2829b4
 prepare_shiny_data|function|421e546fee4180fa
 plot_severity_period|function|25c4e6306b8ceb3d
-severity_plot|stem|d40d645b9c423117|182beb366c834ce3|598120d4d5dec5fa|1171342400||t20422.3600256552s|s235907b|235907|rds|local|vector|||0.024||
+crash_plot|stem|ab6d6273826e1d97|8615c23766bd795b|69fabc021f2880cc|-1378684996||t20422.8534424285s|s234719b|234719|rds|local|vector|||0.021||
